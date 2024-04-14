@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "822030072219",
+    "project_id": "yemekler-6b8ce",
+    "storage_bucket": "yemekler-6b8ce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:822030072219:android:4cee158c25d5e1c40d493e",
+        "android_client_info": {
+          "package_name": "com.foods.foods_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOnq4snebe3UOHiwfgHnvv2FQ0RWR8EbY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
