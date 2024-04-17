@@ -3,12 +3,19 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:foods_app/data/entity/yemekler.dart';
+import '../../data/repo/yemekler_dao.dart';
 
 class AnasayfaCubit extends Cubit<List<Yemekler>> {
   AnasayfaCubit() : super(<Yemekler>[]);
 
   var collectionYemekler = FirebaseFirestore.instance.collection('yemekler');
   final storageRef = FirebaseStorage.instance.ref();
+
+  var yrepo = YemeklerDao();
+
+  Future<void> sepeteEkle(String yemekId, int adet) async {
+    await yrepo.sepeteEkle(yemekId, adet);
+  }
 
   Future<void> yemekleriGetir() async {
     collectionYemekler.snapshots().listen((event) {
@@ -41,5 +48,6 @@ class AnasayfaCubit extends Cubit<List<Yemekler>> {
       }
       emit(yemeklerListesi);
     });
+
   }
 }

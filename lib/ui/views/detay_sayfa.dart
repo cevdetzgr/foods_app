@@ -25,9 +25,9 @@ class _DetaySayfaState extends State<DetaySayfa> {
           title: Text(widget.yemek.yemek_ad),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: Center(
-            child: Column(
+            child: Column( mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 FadeInImage(
                   placeholder: const AssetImage('resimler/placeholder.png'),
@@ -38,8 +38,21 @@ class _DetaySayfaState extends State<DetaySayfa> {
                   fadeOutDuration: const Duration(milliseconds: 150),
                   fadeInDuration: const Duration(milliseconds: 300),
                 ),
-                Text("${widget.yemek.yemek_fiyat}₺"),
-                Text(widget.yemek.yemek_ad),
+                //20px boşluk bırakacak spacer ekle
+                const SizedBox(height: 20),
+                Text("₺${widget.yemek.yemek_fiyat}",
+                    style: const TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w500
+                )),
+                Text(
+                    widget.yemek.yemek_ad,
+                    style: const TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                    )
+                ),
+                const SizedBox(height: 15),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -51,13 +64,42 @@ class _DetaySayfaState extends State<DetaySayfa> {
                     ),
                     Text(
                       "${context.watch<DetaySayfaCubit>().state}",
-                      style: const TextStyle(fontSize: 16),
+                      style: const TextStyle(fontSize: 30),
                     ),
                     IconButton(
                       onPressed: () {
                         context.read<DetaySayfaCubit>().adetArttir();
                       },
                       icon: const Icon(Icons.add_circle_outline),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Row( mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Text("Toplam:" , style: TextStyle(fontSize: 20)),
+                        AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 100),
+                          transitionBuilder: (Widget child, Animation<double> animation) {
+                            return FadeTransition(opacity: animation, child: child,);
+                          },
+                          child: Text(
+                            "${widget.yemek.yemek_fiyat * context.watch<DetaySayfaCubit>().state}₺",
+                            key: ValueKey<int>(context.watch<DetaySayfaCubit>().state),
+                            style: const TextStyle(fontSize: 20),
+                          ),
+                        ),
+                      ]
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        //Sepete ekleme işlemi
+
+                      },
+                      child: const Text("Sepete Ekle", style: TextStyle(fontSize: 20)),
                     ),
                   ],
                 ),
@@ -69,3 +111,4 @@ class _DetaySayfaState extends State<DetaySayfa> {
     );
   }
 }
+

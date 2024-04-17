@@ -13,7 +13,6 @@ class Anasayfa extends StatefulWidget {
   State<Anasayfa> createState() => _AnasayfaState();
 }
 
-var collectionYemekler = FirebaseFirestore.instance.collection("yemekler");
 
 class _AnasayfaState extends State<Anasayfa> {
 
@@ -96,7 +95,9 @@ class _AnasayfaState extends State<Anasayfa> {
                                   style: const TextStyle(fontSize: 15)
                               ),
                               IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.read<AnasayfaCubit>().sepeteEkle(yemek.yemek_id, 1);
+                                },
                                 icon: const Icon(Icons.add_shopping_cart,),
                               ),
                             ],

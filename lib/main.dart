@@ -5,6 +5,7 @@ import 'package:foods_app/ui/cubit/anasayfa_cubit.dart';
 import 'package:foods_app/ui/cubit/detay_sayfa_cubit.dart';
 import 'package:foods_app/ui/cubit/sepet_sayfa_cubit.dart';
 import 'package:foods_app/ui/views/anasayfa.dart';
+import 'package:foods_app/ui/views/sepet_sayfa.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -15,9 +16,25 @@ Future<void> main() async {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    Anasayfa(),
+    SepetSayfa(),
+  ];
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +51,24 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const Anasayfa(),
+          home: Scaffold(
+            body: _widgetOptions.elementAt(_selectedIndex),
+            bottomNavigationBar: BottomNavigationBar(
+              items: const <BottomNavigationBarItem>[
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Anasayfa',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.shopping_cart),
+                  label: 'Sepet',
+                ),
+              ],
+              currentIndex: _selectedIndex,
+              selectedItemColor: Colors.amber[800],
+              onTap: _onItemTapped,
+            ),
+          ),
         )
     );
   }

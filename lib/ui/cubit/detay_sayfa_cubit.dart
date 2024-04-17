@@ -1,6 +1,5 @@
 
 import 'package:bloc/bloc.dart';
-import 'package:foods_app/data/repo//yemekler_dao.dart';
 
 class DetaySayfaCubit extends Cubit<int> {
   DetaySayfaCubit() : super(0);
